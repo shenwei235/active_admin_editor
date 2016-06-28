@@ -102,43 +102,56 @@
    */
   Editor.prototype.upload = function(file, callback) {
     var _this = this
-    _this._uploading(true)
+    
+    var reader  = new FileReader();
+    
+    reader.addEventListener("load", function () {
+      var fileBase64 = reader.result;
+      var formData = { image: { base64: fileBase64, imageable_type: 'Article', imageable_id: $('#article_id').val() } };
+      
+      $.ajax({
+        url: '/my/images',
+        data: formData,
+        //Ajax events
+        beforeSend: function (e) {
+          _this._uploading(true)
+        },
+        success: function (e) {
+          callback(e.url)
+        },
+        error: function (e) {
+          alert('error');
+        },
+        // Form data
+        method: 'POST'
+      });
+    }, false);
+    
+    reader.readAsDataURL(file);
 
-    var xhr = new XMLHttpRequest()
-      , fd = new FormData()
-      , key = config.storage_dir + '/' + Date.now().toString() + '-' + file.name
-
-    fd.append('key', key)
-    fd.append('AWSAccessKeyId', config.aws_access_key_id)
-    fd.append('acl', 'public-read')
-    fd.append('policy', this.policy.document)
-    fd.append('signature', this.policy.signature)
-    fd.append('Content-Type', file.type)
-    fd.append('file', file)
-
-    xhr.upload.addEventListener('progress', function(e) {
-      _this.loaded   = e.loaded
-      _this.total    = e.total
-      _this.progress = e.loaded / e.total
-    }, false)
-
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState != 4) { return }
-      _this._uploading(false)
-      if (xhr.status == 204) {
-        callback(xhr.getResponseHeader('Location'))
-      } else {
-        alert('Failed to upload file. Have you configured S3 properly?')
-      }
-    }
-
-    xhr.open('POST', 'https://' + config.s3_bucket + '.s3.amazonaws.com', true)
-    xhr.send(fd)
-
-    return xhr
+    // return xhr
   }
 
   window.AA.Editor = Editor
+  
+  wysihtml5.commands.insertHr = {
+    // exec usually behaves like a toggle
+    // if the format is applied then undo it (and vica versa)
+    exec: function(composer, command, param) {
+      composer.commands.exec("insertHTML", "<hr/>");
+    },
+
+    // usually returns a truthy value when the command is applied to the current selection
+    // a falsy when the current selection isn't formatted with <foo>
+    state: function(composer, command) {
+       return false;
+    },
+
+    // ignore this for now (it's currently not used)
+    value: function() {
+    }
+  };
+  
 })(window, wysihtml5)
 
 ;(function(window, $) {
@@ -146,3 +159,5 @@
     $.widget.bridge('editor', window.AA.Editor)
   }
 })(window, jQuery)
+
+

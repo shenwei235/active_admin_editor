@@ -2,21 +2,9 @@
   <ul>
     <li><a data-wysihtml5-command="bold" title="Bold"><b>B</b></a></li>
     <li><a data-wysihtml5-command="italic" title="Italic"><i>I</i></a></li>
-    <li><a data-wysihtml5-command="createLink" title="Link">Link</a></li>
+    <li><a data-wysihtml5-command="insertHr" title="Hr">Hr</a></li>
     <li><a data-wysihtml5-command="insertImage" class="insertImage" title="Image">Image</a></li>
   </ul>
-
-  <div class="dialog" data-wysihtml5-dialog="createLink" style="display: none;">
-    <div class="action-group">
-      <a href="#" data-wysihtml5-dialog-action="save" class="button">OK</a>
-      <a href="#" data-wysihtml5-dialog-action="cancel">Cancel</a>
-    </div>
-    <label>
-      Link:
-      <input class="uploadable" type="text" data-wysihtml5-dialog-field="href" value="http://">
-    </label>
-    <div style="clear: both;"></div>
-  </div>
 
   <div class="dialog" data-wysihtml5-dialog="insertImage" style="display: none;">
     <div class="action-group">
@@ -25,7 +13,7 @@
     </div>
     <label>
       Image:
-      <input class="uploadable" type="file"  id="image_url">
+      <input class="uploadable" type="text" data-wysihtml5-dialog-field="src" value="http://" id="image_url">
     </label>
     <div style="clear: both;"></div>
   </div>

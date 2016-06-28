@@ -5051,14 +5051,15 @@ wysihtml5.dom.parse = (function() {
   // ------------ attribute checks ------------ \\
   var attributeCheckMethods = {
     url: (function() {
-      var REG_EXP = /^https?:\/\//i;
+      // var REG_EXP = /^https?:\/\//i;
       return function(attributeValue) {
-        if (!attributeValue || !attributeValue.match(REG_EXP)) {
-          return null;
-        }
-        return attributeValue.replace(REG_EXP, function(match) {
-          return match.toLowerCase();
-        });
+        // if (!attributeValue || !attributeValue.match(REG_EXP)) {
+        //   return null;
+        // }
+        // return attributeValue.replace(REG_EXP, function(match) {
+        //   return match.toLowerCase();
+        // });
+        return attributeValue;
       };
     })(),
     
