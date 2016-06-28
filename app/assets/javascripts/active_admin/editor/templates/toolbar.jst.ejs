@@ -1,7 +1,7 @@
 <div id="<%= id %>" class="toolbar">
   <ul>
-    <li><a data-wysihtml5-command="bold" title="Bold">Bold</a></li>
-    <li><a data-wysihtml5-command="italic" title="Italic">Italic</a></li>
+    <li><a data-wysihtml5-command="bold" title="Bold"><b>B</b></a></li>
+    <li><a data-wysihtml5-command="italic" title="Italic"><i>I</i></a></li>
     <li><a data-wysihtml5-command="createLink" title="Link">Link</a></li>
     <li><a data-wysihtml5-command="insertImage" class="insertImage" title="Image">Image</a></li>
   </ul>
@@ -24,16 +24,8 @@
       <a href="#" data-wysihtml5-dialog-action="cancel">Cancel</a>
     </div>
     <label>
-      Image URL:
-      <input class="uploadable" type="text" data-wysihtml5-dialog-field="src" value="http://" id="image_url">
-    </label>
-    <label>
-      Align:
-      <select data-wysihtml5-dialog-field="className">
-        <option value="">default</option>
-        <option value="wysiwyg-float-left">left</option>
-        <option value="wysiwyg-float-right">right</option>
-      </select>
+      Image:
+      <input class="uploadable" type="file"  id="image_url">
     </label>
     <div style="clear: both;"></div>
   </div>
