@@ -118,9 +118,13 @@
         },
         success: function (e) {
           callback(e.url)
+         _this._uploading(false)
+          
         },
         error: function (e) {
           alert('error');
+          _this._uploading(false)
+          
         },
         // Form data
         method: 'POST'
